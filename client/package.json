@@ -1,0 +1,24 @@
+{
+  "name": "picompile",
+  "version": "1.0.0",
+  "description": "compilation server for robotics",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/superpingu/PiCompile.git"
+  },
+  "author": "superpingu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/superpingu/PiCompile/issues"
+  },
+  "homepage": "https://github.com/superpingu/PiCompile#readme",
+  "dependencies": {
+    "git-cli": "^0.9.0",
+    "shelljs": "^0.6.0",
+    "socket.io-client": "^1.4.5"
+  }
+}
