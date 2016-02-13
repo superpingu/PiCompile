@@ -1,4 +1,4 @@
-var socket = require("socket.io-client")("http://abonetti.fr/picompile");
+var socket = require("socket.io-client")("http://abonetti.fr:3003/compile");
 var git = require("git-cli");
 var shell = require("shelljs");
 var fs = require("fs");
@@ -14,20 +14,19 @@ function exists(file) {
     return true;
 }
 
-function pullRepository(name) {
-    var repo = new Repository(repositoriesRoot+name+"/.git");
-    repo.log(function(err, logs) {
-
-    });
+function pullRepository(repository, callback) {
+    var repo = new Repository(repositoriesRoot+repository.name+"/.git");
+    repo.pull(callback);
 }
-function cloneRepository(name) {
-
+function cloneRepository(repository, callback) {
+    Repository.clone(repository.url, repositoriesRoot+repository.name, callback);
 }
-function launchMake(name) {
-
+function launchMake(name, target) {
+    var command = "make -C "+repositoriesRoot+name+" "+target+" &> "+repositoriesRoot+name+"/log.out";
+    return shell.exec(command, {silent:true}).code;
 }
 function readLog(name) {
-
+    return shell.cat(repositoriesRoot + name + "/log.out");
 }
 
 socket.on('connect', function(){
@@ -40,18 +39,21 @@ socket.on('disconnect', function(){
 
 socket.on('compile', function (repository) {
     if(exists(repositoriesRoot+repository.name+"/.git"))
-        pullRepository(repository);
+        pullRepository(repository, repositoryUpdated);
     else
-        cloneRepository(repository);
+        cloneRepository(repository, repositoryUpdated);
 
-    var hasMakefile = exists(repositoriesRoot+repository.name+"/Makefile") ||
-        exists(repositoriesRoot+repository.name+"/makefile");
-    var returnCode = hasMakefile ? launchMake(repository) : 0;
+    function repositoryUpdated() {
+        var hasMakefile = exists(repositoriesRoot+repository.name+"/Makefile") ||
+            exists(repositoriesRoot+repository.name+"/makefile");
+        var returnCode = hasMakefile ? launchMake(repository.name, "") : 0;
+        var makelog = hasMakefile ? readLog(repository.name) : "";
 
-    socket.emit("compileEnd", {
-        repository : repository.name,
-        makefile: hasMakefile,
-        code: returnCode,
-        log: readLog(repository.name)
-    });
+        socket.emit("compileEnd", {
+            repository : repository.name,
+            makefile: hasMakefile,
+            code: returnCode,
+            log: makelog
+        });
+    }
 });
