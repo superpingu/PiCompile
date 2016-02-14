@@ -1,10 +1,10 @@
 var jsonfile = require('jsonfile');
 
 function readLogs() {
-    return jsonfile.readFileSync("./logs.json");
+    return jsonfile.readFileSync("logs.json");
 }
 function saveLogs() {
-    jsonfile.writeFile("./logs.json", logs, function(err) {
+    jsonfile.writeFile("logs.json", logs, function(err) {
         if(err)
             console.log("Error writing logs : " + err);
     });
