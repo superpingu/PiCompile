@@ -21,6 +21,7 @@ html(lang="fr")
                         a.btn(href="/picompile/repository/#{name}/install") Install
                     if state == "OK" || state == "KO"
                         a.btn(href="/picompile/repository/#{name}/clean") Clean
+                        a.btn(href="/picompile/repository/#{name}/make") Make
         div.container
             div.content
                 if state == "NO"

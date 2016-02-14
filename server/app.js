@@ -86,6 +86,10 @@ app.get('/pcp/repository/:name/clean', function(req, res) {
     startCompilation(req.params.name, "clean");
     res.redirect('/pcp/repository/'+req.params.name);
 });
+app.get('/pcp/repository/:name/make', function(req, res) {
+    startCompilation(req.params.name, "");
+    res.redirect('/pcp/repository/'+req.params.name);
+});
 app.get('/pcp/', function(req, res) {
     res.render('index', {repositories: logs.getAll()});
 });
