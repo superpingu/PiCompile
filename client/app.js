@@ -22,7 +22,7 @@ function cloneRepository(repository, callback) {
     Repository.clone(repository.url, repositoriesRoot+repository.name, callback);
 }
 function launchMake(name, target) {
-    var command = "make -C "+repositoriesRoot+name;
+    var command = "make -C " + repositoriesRoot + name + " " + target;
     return shell.exec(command);
 }
 
