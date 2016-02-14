@@ -48,7 +48,7 @@ socket.on('compile', function (repository) {
             exists(repositoriesRoot+repository.name+"/makefile");
         var returnCode = hasMakefile ? launchMake(repository.name, "") : 0;
         var makelog = hasMakefile ? readLog(repository.name) : "";
-
+        
         socket.emit("compileEnd", {
             repository : repository.name,
             makefile: hasMakefile,

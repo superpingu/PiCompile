@@ -28,6 +28,7 @@ io.of('/compile').on('connection', function (socket) {
     compileSocket = socket;
 
     socket.on('compileEnd', function(data) {
+        console.log("Received compilation results");
         logs.processCompileResult(data);
     });
 });
@@ -46,7 +47,7 @@ function startCompilation(repository, target) {
 // HTTP API
 app.post('/pcp/push', function(req, res) {
     // debug
-    console.dir(req.body);
+    console.log("Received new push data");
     // check the POST looks like something github would send
     if(req.body && req.body.repository) {
         // compile only if the last commit doesn't start with 'WIP' and if compilation is enabled

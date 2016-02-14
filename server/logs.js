@@ -35,7 +35,7 @@ function processCompileResult(results) {
         console.log('compilation results : unknown repository ' + results.repository);
         return;
     }
-    if(!results.hasMakefile) {
+    if(!results.makefile) {
         logs[results.repository].state = "nomake";
     } else {
         logs[results.repository].state = (results.code === 0) ? "OK" : "KO";
