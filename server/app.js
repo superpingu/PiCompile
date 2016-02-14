@@ -58,6 +58,7 @@ app.post('/pcp/push', function(req, res) {
         console.log("Wrong post body :");
         console.dir(req.body);
     }
+    res.sendStatus(200);
 });
 
 app.get('/pcp/repository/:name', function(req, res) {
