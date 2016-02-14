@@ -44,7 +44,9 @@ socket.on('compile', function (repository) {
         var hasMakefile = exists(repositoriesRoot+repository.name+"/Makefile") ||
             exists(repositoriesRoot+repository.name+"/makefile");
         var makeResult = hasMakefile ? launchMake(repository.name, repository.target) : {code: 0, output:""};
-
+        if(makeResult.code !== 0)
+            makeResult.output += "\n\nErrors :\n"+makeResult.stderr;
+        
         socket.emit("compileEnd", {
             repository : repository.name,
             makefile: hasMakefile,
