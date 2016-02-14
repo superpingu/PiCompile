@@ -2,7 +2,7 @@ var express = require('express');
 var path = require('path');
 var app = express();
 var bodyParser = require('body-parser');
-var logs = require('./logs.js');
+var logger = require('./logs.js');
 
 app.use(express.static(path.join(__dirname, 'public')));
 // view engine setup
@@ -84,5 +84,6 @@ app.get('/pcp/repository/:name/clean', function(req, res) {
     res.redirect('..');
 });
 app.get('/pcp/', function(req, res) {
-    res.render('index', {repositories: logs.getAll()});
+    console.dir(logger);
+    res.render('index', {repositories: logger.getAll()});
 });
