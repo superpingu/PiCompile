@@ -1,3 +1,9 @@
 {
-    
+	"RobotDriver": {
+		"state": "OK",
+		"log": "bla bla bla",
+		"commit_msg": "fixed bugs",
+		"commit_author": "superpingu",
+		"url": "https://github.com/superpingu/PiCompile.git"
+	}   
 }
