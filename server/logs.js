@@ -58,6 +58,14 @@ function setState(repository, state) {
     logs[repository].state = state;
     saveLogs();
 }
+function getAll() {
+    var result = [];
+    for(var key in logs) {
+        logs[key].name = key;
+        result.push(logs[key]);
+    }
+    return result;
+}
 
 module.export = {
     savePush: logPush,
@@ -65,5 +73,5 @@ module.export = {
     processCompileResult: processCompileResult,
     get: getLog,
     setState: setState,
-    getAll: function() { return logs; }
+    getAll: getAll
 };
