@@ -55,7 +55,7 @@ app.post('/pcp/push', function(req, res) {
             startCompilation(req.body.repository.name, "");
         }
     } else {
-        console.err("Wrong post body :");
+        console.log("Wrong post body :");
         console.dir(req.body);
     }
 });
@@ -69,19 +69,19 @@ app.get('/pcp/repository/:name', function(req, res) {
 });
 app.get('/pcp/repository/:name/enable', function(req, res) {
     startCompilation(req.params.name, "");
-    res.redirect('..');
+    res.redirect('/pcp/repository/'+req.params.name);
 });
 app.get('/pcp/repository/:name/disable', function(req, res) {
     logs.setState(req.params.name, "NO");
-    res.redirect('..');
+    res.redirect('/pcp/repository/'+req.params.name);
 });
 app.get('/pcp/repository/:name/install', function(req, res) {
     startCompilation(req.params.name, "install");
-    res.redirect('..');
+    res.redirect('/pcp/repository/'+req.params.name);
 });
 app.get('/pcp/repository/:name/clean', function(req, res) {
     startCompilation(req.params.name, "clean");
-    res.redirect('..');
+    res.redirect('/pcp/repository/'+req.params.name);
 });
 app.get('/pcp/', function(req, res) {
     res.render('index', {repositories: logs.getAll()});

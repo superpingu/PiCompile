@@ -5,7 +5,7 @@ function readLogs() {
 }
 function saveLogs() {
     jsonfile.writeFile("./logs.json", logs, function(err) {
-        console.err("Error writing logs : " + err);
+        console.log("Error writing logs : " + err);
     });
 }
 var logs = readLogs();
