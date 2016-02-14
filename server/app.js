@@ -16,7 +16,7 @@ var server = app.listen(3003, function () {
   var host = server.address().address;
   var port = server.address().port;
 
-  console.log('MotorTest listening at http://%s:%s', host, port);
+  console.log('PiCompile listening at http://%s:%s', host, port);
 });
 
 // connection to compile server
@@ -44,7 +44,7 @@ function startCompilation(repository, target) {
     logs.setState(repository, "compiling");
 }
 // HTTP API
-app.post('/push', function(req, res) {
+app.post('/pcp/push', function(req, res) {
     // debug
     console.dir(req.body);
     // check the POST looks like something github would send
@@ -60,29 +60,29 @@ app.post('/push', function(req, res) {
     }
 });
 
-app.get('/repository/:name', function(req, res) {
+app.get('/pcp/repository/:name', function(req, res) {
     var log = logs.get(req.params.name);
     if(log === null)
         res.sendStatus(404);
     else
         res.render('repository', log);
 });
-app.get('/repository/:name/enable', function(req, res) {
+app.get('/pcp/repository/:name/enable', function(req, res) {
     startCompilation(req.params.name, "");
     res.redirect('..');
 });
-app.get('/repository/:name/disable', function(req, res) {
+app.get('/pcp/repository/:name/disable', function(req, res) {
     logs.setState(req.params.name, "NO");
     res.redirect('..');
 });
-app.get('/repository/:name/install', function(req, res) {
+app.get('/pcp/repository/:name/install', function(req, res) {
     startCompilation(req.params.name, "install");
     res.redirect('..');
 });
-app.get('/repository/:name/clean', function(req, res) {
+app.get('/pcp/repository/:name/clean', function(req, res) {
     startCompilation(req.params.name, "clean");
     res.redirect('..');
 });
-app.get('/', function(req, res) {
+app.get('/pcp/', function(req, res) {
     res.render('index', {repositories: logs.getAll()});
 });

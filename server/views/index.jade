@@ -2,7 +2,7 @@ doctype html
 html(lang="fr")
     head
         title Telecom ParisToc compilation server
-        link(rel='stylesheet', href='styles/style.css')
+        link(rel='stylesheet', href='/picompile/styles/style.css')
     body
         div.bg.light
             div.bg-bg
@@ -21,5 +21,5 @@ html(lang="fr")
                                 object(class="repo-img #{repository.state}")
                                 p=repository.name
         div.topbar
-            img(src="images/hammer.svg").topbar-icon
+            img(src="/picompile/images/hammer.svg").topbar-icon
             h2.topbar-title Telecom ParisToc compilation server
