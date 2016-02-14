@@ -37,6 +37,6 @@ html(lang="fr")
                 else if state == "OK" || state == "KO"
                     p Compiled commit&nbsp;&nbsp;
                         span.commit-msg= commit_msg
-                        &nbsp;&nbsp;by&nbsp;
+                        | &nbsp;&nbsp;by&nbsp;
                         span.commit-author= commit_author
                     p.log !{log}

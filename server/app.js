@@ -68,6 +68,7 @@ app.get('/pcp/repository/:name', function(req, res) {
         res.render('repository', log);
 });
 app.get('/pcp/repository/:name/enable', function(req, res) {
+    logs.setState(req.params.name, "OK");
     startCompilation(req.params.name, "");
     res.redirect('/pcp/repository/'+req.params.name);
 });

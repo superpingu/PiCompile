@@ -3,7 +3,7 @@ var git = require("git-cli");
 var shell = require("shelljs");
 var fs = require("fs");
 
-var repositoriesRoot = "~/compileServer/";
+var repositoriesRoot = "/home/pi/repositories/";
 
 function exists(file) {
     try {
