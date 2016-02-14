@@ -1,5 +1,5 @@
 var socket = require("socket.io-client")("http://abonetti.fr:3003/compile");
-var git = require("git-cli");
+var Repository = require("git-cli").Repository;
 var shell = require("shelljs");
 var fs = require("fs");
 
