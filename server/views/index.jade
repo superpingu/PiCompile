@@ -1,0 +1,25 @@
+doctype html
+html(lang="fr")
+    head
+        title Telecom ParisToc compilation server
+        link(rel='stylesheet', href='styles/style.css')
+    body
+        div.bg.light
+            div.bg-bg
+            div.noise
+        div.index-container
+            table
+                tr
+                    - var i = 0;
+                    each repository in repositories
+                        - i++;
+                        if i == 6
+                            - i = 1;
+                            !{"</tr><tr>"}
+                        td
+                            a(href="/picompile/repository/#{repository.name}").repo
+                                object(class="repo-img #{repository.state}")
+                                p=repository.name
+        div.topbar
+            img(src="images/hammer.svg").topbar-icon
+            h2.topbar-title Telecom ParisToc compilation server

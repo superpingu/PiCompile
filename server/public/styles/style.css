@@ -1,0 +1,253 @@
+body {
+  padding: 0;
+  margin: 0;
+  font: 14px "Kirvy", Helvetica, Arial, sans-serif;
+  background: #f3f2e6;
+}
+a {
+  color: #e4342a;
+  text-decoration: none;
+}
+a:hover {
+  color: #e3631b;
+  text-decoration: none;
+}
+
+/* top bar */
+.topbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 7vh;
+    margin: 0;
+    padding: 0;
+    color: #FFF9E9;
+    background: #212121;
+    box-sizing: border-box;
+    box-shadow: 0 -1px 20px rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+}
+.topbar-icon {
+  margin: 0.5vh;
+  margin-left: 5vw;
+  height: 6vh;
+}
+.topbar-title {
+    position: relative;
+    top: -9vh;
+    left: 15vw;
+    text-align: left;
+    font-weight: 500;
+    font-size: 3.5vh;
+}
+.topbar-btn {
+    position: absolute;
+    right : 3vw;
+    top: -0.5vh;
+}
+/* background */
+.bg-bg, .bg-mg, .bg, .noise {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+.noise {
+  background: url(../images/noise.png) repeat;
+  opacity: 0.15;
+  background-size: 130px;
+}
+.OK .noise, .NO .noise, .nomake .noise, .compiling .noise {
+    opacity: 0.20;
+}
+.OK .bg-bg {
+    background: url(../images/green-bg.svg) no-repeat;
+    background-size: cover;
+}
+.OK .bg-mg {
+    background: url(../images/green-mg.svg) no-repeat;
+    background-size: cover;
+}
+.KO .noise {
+    opacity: 0.30;
+}
+.KO .bg-bg {
+    background: url(../images/red-bg.svg) no-repeat;
+    background-size: cover;
+}
+.KO .bg-mg {
+    background: url(../images/red-mg.svg) no-repeat;
+    background-size: cover;
+}
+.NO .bg-bg, .nomake .bg-bg {
+    background: url(../images/grey-bg.svg) no-repeat;
+    background-size: cover;
+}
+.NO .bg-mg, .nomake .bg-mg, .compiling .bg-mg {
+    background: none;
+    background-size: cover;
+}
+.compiling .bg-bg {
+    background: url(../images/blue-bg.svg) no-repeat;
+    background-size: cover;
+}
+.light .bg-bg {
+    background: url(../images/light-bg.svg) repeat-y;
+    background-size: cover;
+}
+
+/* main container */
+.index-container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+}
+table {
+    margin-top: 10vh;
+    margin-left: 5vw;
+}
+.container {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 65vw;
+    height: 85vh;
+    top: 15vh;
+    max-width: 850px;
+    background: rgb(40, 40, 40);
+    background: rgba(20, 20, 20, 0.45);
+    border-radius: 8px 8px 0 0;
+    overflow: scroll;
+}
+.content {
+    position: relative;
+    margin: 0;
+    padding-top: 1vh;
+    padding-left: 3vh;
+    padding-right: 3vh;
+    color: #FFF9E9;
+    font-size: 20px;
+    font-weight: 700;
+}
+.commit-msg {
+    font: 20px "Menlo";
+    color: rgb(255, 216, 140);
+}
+.commit-author {
+    font-weight: 500;
+    color: rgb(255, 216, 140);
+}
+.central-msg {
+    position: relative;
+    top: 30vh;
+    font: 20px "Menlo";
+    text-align: center;
+}
+.log {
+    font: 18px "Menlo";
+}
+
+.repo {
+    margin-left: 4vw;
+    margin-right: 4vw;
+    margin-bottom: 5vh;
+    padding: 0;
+    width: 15vw;
+    text-align: center;
+}
+.repo:hover p {
+    color: #c15519;
+}
+.repo p {
+    color: #2b2b2b;
+    font-size: 2vw;
+    font-weight: 700;
+}
+.repo-img {
+    position: relative;
+    width: 10vw;
+    height: 10vw;
+    margin-top: 2vh;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    box-shadow: 0 -1px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 1.5vw;
+}
+.repo .OK {
+    background: url(../images/green-mini.svg) no-repeat;
+    background-size: contain;
+}
+.repo .KO {
+    background: url(../images/red-mini.svg) no-repeat;
+    background-size: contain;
+}
+.repo .compiling {
+    background: url(../images/blue-mini.svg) no-repeat;
+    background-size: contain;
+}
+.repo .NO, .repo .nomake {
+    background: url(../images/grey-mini.svg) no-repeat;
+    background-size: contain;
+}
+
+.fa {
+    margin-left: 2vh;
+    margin-right: 2vh;
+}
+.btn {
+  margin: 2vmin 2vmin 2vmin 4vmin;
+  border-radius: 5px;
+  padding: 0.7vmin;
+  transition: .3s;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  display: inline-block;
+  color: #FFF9E9;
+  border: 2px #FFF9E9 solid;
+  font-size: 18px;
+}
+.btn:hover {
+  margin: 2vmin 2vmin 2vmin 4vmin;
+  background-color: #FFF9E9;
+  color: #3e3c41;
+}
+
+/* fonts */
+@font-face {
+  font-family: 'Kirvy';
+  font-style: normal;
+  font-weight: 500;
+  src: url(../fonts/Kirvy-Regular.otf);
+}
+@font-face {
+  font-family: 'Kirvy';
+  font-style: normal;
+  font-weight: 700;
+  src: url(../fonts/Kirvy-Bold.otf);
+}
+@font-face {
+  font-family: 'Kirvy';
+  font-style: normal;
+  font-weight: 300;
+  src: url(../fonts/Kirvy-Light.otf);
+}
+@font-face {
+  font-family: 'Kirvy';
+  font-style: italic;
+  font-weight: 100;
+  src: url(../fonts/Kirvy-Thin.otf);
+}
+
+@font-face {
+  font-family: 'Menlo';
+  font-style: normal;
+  font-weight: 500;
+  src: url(../fonts/Menlo.ttf);
+}

@@ -32,6 +32,17 @@ io.of('/compile').on('connection', function (socket) {
     });
 });
 
+function startCompilation(repository, target) {
+    var log = logs.get(repository);
+    if(log === null || compileSocket === null)
+        return;
+    compileSocket.emit('compile', {
+        name: repository,
+        url: log.url,
+        target: target
+    });
+    logs.setState(repository, "compiling");
+}
 // HTTP API
 app.post('/push', function(req, res) {
     // debug
@@ -39,12 +50,9 @@ app.post('/push', function(req, res) {
     // check the POST looks like something github would send
     if(req.body && req.body.repository) {
         // compile only if the last commit doesn't start with 'WIP' and if compilation is enabled
-        if(logs.allowsCompile(req.body) && compileSocket) {
-            logs.logPush(req.body);
-            compileSocket.emit('compile', {
-                name: req.body.repository.name,
-                url: req.body.repository.clone_url
-             });
+        if(logs.allowsCompile(req.body)) {
+            logs.savePush(req.body);
+            startCompilation(req.body.repository.name, "");
         }
     } else {
         console.err("Wrong post body :");
@@ -53,10 +61,28 @@ app.post('/push', function(req, res) {
 });
 
 app.get('/repository/:name', function(req, res) {
-    // TODO
-    res.render('index', {});
+    var log = logs.get(req.params.name);
+    if(log === null)
+        res.sendStatus(404);
+    else
+        res.render('repository', log);
+});
+app.get('/repository/:name/enable', function(req, res) {
+    startCompilation(req.params.name, "");
+    res.redirect('..');
+});
+app.get('/repository/:name/disable', function(req, res) {
+    logs.setState(req.params.name, "NO");
+    res.redirect('..');
+});
+app.get('/repository/:name/install', function(req, res) {
+    startCompilation(req.params.name, "install");
+    res.redirect('..');
+});
+app.get('/repository/:name/clean', function(req, res) {
+    startCompilation(req.params.name, "clean");
+    res.redirect('..');
 });
 app.get('/', function(req, res) {
-    // TODO
-    res.render('index', {});
+    res.render('index', {repositories: logs.getAll()});
 });

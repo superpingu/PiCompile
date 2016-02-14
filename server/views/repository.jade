@@ -1,0 +1,42 @@
+doctype html
+html(lang="fr")
+    head
+        title #{name}
+        link(rel='stylesheet', href='/picompile/styles/style.css')
+    body
+        div(class="#{state} bg")
+            div.bg-bg
+            div.noise
+            div.bg-mg
+        div.topbar
+            img(src="/picompile/images/hammer.svg").topbar-icon
+            h2.topbar-title Telecom ParisToc - #{name}
+            div.topbar-btn
+                if state == "NO"
+                    a.btn(href="/picompile/repository/#{name}/enable") Enable
+                else
+                    a.btn(href="/picompile/repository/#{name}/disable") Disable
+                    if state == "OK"
+                        a.btn(href="/picompile/repository/#{name}/install") Install
+                    if state == "OK" || state == "KO"
+                        a.btn(href="/picompile/repository/#{name}/clean") Clean
+        div.container
+            div.content
+                if state == "NO"
+                    p.central-msg Compilation is desactivated in this repository
+                else if state == "nomake"
+                    p.central-msg Makefile not found
+                        br
+                        br
+                        | Makefile has to be at the repository root
+                else if state == "compiling"
+                    p.central-msg Processing ...
+                        br
+                        br
+                        | This repository is being updated. Please reload the page in a few seconds.
+                else if state == "OK" || state == "KO"
+                    p Compiled commit&nbsp;&nbsp;
+                        span.commit-msg= commit_msg
+                        &nbsp;&nbsp;by&nbsp;
+                        span.commit-author= commit_author
+                    p.log !{log}

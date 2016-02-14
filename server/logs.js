@@ -16,8 +16,7 @@ function logPush(push) {
         logs[repo] = {state: "OK"};
     logs[repo].commit_msg = push.head_commit.message;
     logs[repo].commit_author = push.head_commit.author.name;
-    logs[repo].state = "compiling";
-
+    logs[repo].url = push.repository.clone_url;
     saveLogs();
 }
 
@@ -44,9 +43,27 @@ function processCompileResult(results) {
 
     saveLogs();
 }
+function getLog(repository) {
+    var log = logs[repository];
+    if(typeof(log) === "undefined")
+        return null;
+    else {
+        log.name = repository;
+        return log;
+    }
+}
+function setState(repository, state) {
+    if(logs[repository] === null)
+        return;
+    logs[repository].state = state;
+    saveLogs();
+}
 
 module.export = {
-    logPush: logPush,
+    savePush: logPush,
     allowsCompile: allowsCompile,
-    processCompileResult: processCompileResult
+    processCompileResult: processCompileResult,
+    get: getLog,
+    setState: setState,
+    getAll: function() { return logs; }
 };
