@@ -67,7 +67,7 @@ function getAll() {
     return result;
 }
 
-module.export = {
+module.exports = {
     savePush: logPush,
     allowsCompile: allowsCompile,
     processCompileResult: processCompileResult,
