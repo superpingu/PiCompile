@@ -22,11 +22,8 @@ function cloneRepository(repository, callback) {
     Repository.clone(repository.url, repositoriesRoot+repository.name, callback);
 }
 function launchMake(name, target) {
-    var command = "make -C "+repositoriesRoot+name+" "+target+" &> log.out";
-    return shell.exec(command, {silent:true}).code;
-}
-function readLog() {
-    return shell.cat("log.out");
+    var command = "make -C "+repositoriesRoot+name;
+    return shell.exec(command);
 }
 
 socket.on('connect', function(){
@@ -46,14 +43,13 @@ socket.on('compile', function (repository) {
     function repositoryUpdated() {
         var hasMakefile = exists(repositoriesRoot+repository.name+"/Makefile") ||
             exists(repositoriesRoot+repository.name+"/makefile");
-        var returnCode = hasMakefile ? launchMake(repository.name, "") : 0;
-        var makelog = hasMakefile ? readLog() : "";
+        var makeResult = hasMakefile ? launchMake(repository.name, repository.target) : {code: 0, output:""};
 
         socket.emit("compileEnd", {
             repository : repository.name,
             makefile: hasMakefile,
-            code: returnCode,
-            log: makelog
+            code: makeResult.code,
+            log: makeResult.output.replace(/\n/g, "<br>")
         });
     }
 });
