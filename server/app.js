@@ -30,6 +30,8 @@ io.of('/compile').on('connection', function (socket) {
     socket.on('compileEnd', function(data) {
         console.log("Received compilation results");
         logs.processCompileResult(data);
+        io.emit(data.repository+'-update');
+        io.emit('all-update');
     });
 });
 

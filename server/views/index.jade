@@ -23,3 +23,7 @@ html(lang="fr")
         div.topbar
             img(src="/picompile/images/hammer.svg").topbar-icon
             h2.topbar-title Telecom ParisToc compilation server
+        script(src="/picompile/scripts/socket.io.js")
+        script.
+            var socket = io("http://abonetti.fr:3003/update");
+            socket.on('all-update', function() { location.reload(); });

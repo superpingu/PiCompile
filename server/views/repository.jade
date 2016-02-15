@@ -42,3 +42,7 @@ html(lang="fr")
                         | &nbsp;&nbsp;by&nbsp;
                         span.commit-author= commit_author
                     p.log !{log}
+        script(src="/picompile/scripts/socket.io.js")
+        script.
+            var socket = io("http://abonetti.fr:3003/update");
+            socket.on('#{name}-update', function() { location.reload(); });
