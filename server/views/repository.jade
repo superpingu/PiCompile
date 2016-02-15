@@ -35,7 +35,7 @@ html(lang="fr")
                     p.central-msg Processing ...
                         br
                         br
-                        | This repository is being updated. Please reload the page in a few seconds.
+                        | This repository is being updated. Please wait a few seconds.
                 else if state == "OK" || state == "KO"
                     p Compiled commit&nbsp;&nbsp;
                         span.commit-msg= commit_msg
@@ -44,5 +44,5 @@ html(lang="fr")
                     p.log !{log}
         script(src="/picompile/scripts/socket.io.js")
         script.
-            var socket = io("http://abonetti.fr:3003/");
+            var socket = io.connect("http://abonetti.fr:3003/");
             socket.on('#{name}-update', function() { location.reload(); });
