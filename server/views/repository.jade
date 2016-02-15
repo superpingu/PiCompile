@@ -44,5 +44,5 @@ html(lang="fr")
                     p.log !{log}
         script(src="/picompile/scripts/socket.io.js")
         script.
-            var socket = io("http://abonetti.fr:3003/update");
+            var socket = io("http://abonetti.fr:3003/");
             socket.on('#{name}-update', function() { location.reload(); });

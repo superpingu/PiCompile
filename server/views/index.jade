@@ -25,5 +25,5 @@ html(lang="fr")
             h2.topbar-title Telecom ParisToc compilation server
         script(src="/picompile/scripts/socket.io.js")
         script.
-            var socket = io("http://abonetti.fr:3003/update");
+            var socket = io("http://abonetti.fr:3003/");
             socket.on('all-update', function() { location.reload(); });
